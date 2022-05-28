@@ -2,8 +2,11 @@
 const fs = require('node:fs');	
 
 const { Client, Collection, Intents } = require('discord.js');
+const { getVoiceConnection } = require('@discordjs/voice');
 
 const { token } = require('./config.json');
+
+connection = getVoiceConnection();
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, 
@@ -43,10 +46,6 @@ client.on('interactionCreate', async (interaction) => {
 // When a message is sent
 client.on('messageCreate', async (msg) => {
 	if (msg.author.id == client.user.id) return;
-	await msg.channel.sendTyping();
-	await resolveAfterXSeconds(3);
-	await msg.channel.send();
-	
 });
 
 // Login to Discord with your client's token
