@@ -1,0 +1,14 @@
+const fs = require('node:fs');
+
+var charEmojis = {};
+var delta = "🇦".codePointAt(0) - "a".codePointAt(0); 
+
+console.log(String.fromCodePoint("🇦".codePointAt(0)));
+
+for (i = "a".codePointAt(0); i <= "z".codePointAt(0); ++i) {
+  charEmojis[String.fromCodePoint(i)] = String.fromCodePoint(i + delta);
+}
+
+charEmojisJSON = JSON.stringify(charEmojis, null, 4);
+
+fs.writeFileSync("charEmojis.json", charEmojisJSON, (err) => {if (err) throw err;} );
