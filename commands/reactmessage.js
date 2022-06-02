@@ -2,7 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { getVoiceConnection, joinVoiceChannel } = require('@discordjs/voice');
 const fs = require("fs");
 
-const charEmojis = JSON.parse(fs.readFileSync('charEmojis.json'));
+const contents = fs.readFileSync('charEmojis.json', 'utf8');
+const charEmojis = JSON.parse(contents);
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,7 +24,7 @@ module.exports = {
 
 async function echo(interaction) {
   const messageId = interaction.options.getString('messageid');
-  const reactMessage = interaction.options.getString('message').toLowerCase();
+  const reactMessage = interaction.options.getString('message').toUpperCase();
 
   console.log("reactMessage: finding messageid " + messageId);
   
@@ -47,7 +48,10 @@ async function echo(interaction) {
   }
 
   for (i of reactMessage) {
-    if ((/[a-z ]/).test(i)) {
+    
+    if ((/[A-Z ]/).test(i)) {
+    
+    // (charEmojis.keys().includes(i)) {
       console.log("reacting: " + i + " as " + charEmojis[i]);
       
       msg.react(charEmojis[i])
