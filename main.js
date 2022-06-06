@@ -1,17 +1,17 @@
 // Require the necessary discord.js classes
 const fs = require('node:fs');	
+const wait = require('node:timers/promises').setTimeout;
 
 const { Client, Collection, Intents } = require('discord.js');
 const { getVoiceConnection } = require('@discordjs/voice');
 
 const { token } = require('./config.json');
-
 connection = getVoiceConnection();
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, 
 																			Intents.FLAGS.GUILD_MESSAGES,
-																			// Intents.FLAGS.GUILD_VOICE_STATES,
+																			Intents.FLAGS.GUILD_VOICE_STATES,
 																		 ] });
 
 // Get commands from js modules
@@ -21,6 +21,9 @@ for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.data.name, command);
 }
+
+// create voice player
+client.voice;
 
 // EVENTS
 // When the client is ready, run this code (only once)
@@ -35,10 +38,10 @@ client.on('interactionCreate', async (interaction) => {
 	const command = client.commands.get(interaction.commandName);
 
 	try {
-		await command.execute(interaction);
+		console.log(client);
+		await command.execute(interaction, client);
 	} catch (err) {
 		console.error(err);
-		await interaction.reply({ content: 'oops... there was an error executing this command...', ephemeral: true });
 	}
 
 });
@@ -50,9 +53,3 @@ client.on('messageCreate', async (msg) => {
 
 // Login to Discord with your client's token
 client.login(token);
-
-function resolveAfterXSeconds(x) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 1000 * x);
-  });
-}
