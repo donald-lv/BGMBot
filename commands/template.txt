@@ -1,0 +1,20 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { getVoiceConnection, joinVoiceChannel } = require('@discordjs/voice');
+
+module.exports = {
+  data: new SlashCommandBuilder()
+        .setName('NAME')
+        .setDescription('DESCRIPTION')
+ 
+        .addStringOption(option =>
+          option.setName('ARGNAME')
+            .setDescription('ARGDESCRIPT')
+            .setRequired(BOOLEAN)),
+
+  execute:NAME,
+};
+
+async function NAME(interaction) {
+  
+  await interaction.reply({ content: 'Finished', ephemeral: true });
+}
