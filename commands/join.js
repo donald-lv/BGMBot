@@ -5,7 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
         .setName('join')
         .setDescription('Joins your voice channel'),
-  async execute(interaction) {join(interaction)},
+  execute: join,
 };
 
 async function join(interaction) {
