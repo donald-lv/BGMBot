@@ -24,5 +24,4 @@ async function join(interaction) {
   await interaction.reply('Joined your voice channel.');
   // await setTimeout(connection.destroy(), 5000);
   
-  
 }
