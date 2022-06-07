@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { getVoiceConnection, joinVoiceChannel } = require('@discordjs/voice');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,7 +13,7 @@ module.exports = {
   execute:NAME,
 };
 
-async function NAME(interaction) {
+async function NAME(interaction, client) {
   
   await interaction.reply({ content: 'Finished', ephemeral: true });
 }
