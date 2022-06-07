@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const wait = require('node:timers/promises').setTimeout;
 
 const { Client, Collection, Intents } = require('discord.js');
-const { getVoiceConnection } = require('@discordjs/voice');
+const { createAudioPlayer, getVoiceConnection } = require('@discordjs/voice');
 
 const { token } = require('./config.json');
 connection = getVoiceConnection();
@@ -23,7 +23,7 @@ for (const file of commandFiles) {
 }
 
 // create voice player
-client.voice;
+client.player = createAudioPlayer();
 
 // EVENTS
 // When the client is ready, run this code (only once)
@@ -38,7 +38,6 @@ client.on('interactionCreate', async (interaction) => {
 	const command = client.commands.get(interaction.commandName);
 
 	try {
-		console.log(client);
 		await command.execute(interaction, client);
 	} catch (err) {
 		console.error(err);
