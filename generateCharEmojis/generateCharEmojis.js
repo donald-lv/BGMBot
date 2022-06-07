@@ -1,6 +1,8 @@
 // doesn't produce special characters
 const fs = require('node:fs');
-const contents = fs.readFileSync("./generateCharEmojis/customCharEmojis.json");
+const { join } = require('node:path');
+
+const contents = fs.readFileSync(join(__dirname, "customCharEmojis.json"));
 const customCharEmojis = JSON.parse(contents);
 
 var charEmojis = {};
@@ -20,7 +22,7 @@ charEmojis = Object.keys(charEmojis)
 console.log(charEmojis);
 
 charEmojisJSON = JSON.stringify(charEmojis, null, 4);
-fs.writeFileSync("charEmojis.json", charEmojisJSON, (err) => {if (err) throw err;} );
+fs.writeFileSync(join(__dirname, "charEmojis.json"), charEmojisJSON, (err) => {if (err) throw err;} );
 
 
 
