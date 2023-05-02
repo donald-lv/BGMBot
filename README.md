@@ -7,4 +7,4 @@ Features
 
 Future features (hopefully):
 - Play music
-- Possibly a Talking Tom-like feature, may have security concerns
+- Possibly a Talking Tom-like feature
